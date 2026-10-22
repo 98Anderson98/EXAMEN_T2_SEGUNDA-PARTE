@@ -20,7 +20,10 @@
     <div class="side-footer">
       <div class="user">
         <span class="avatar">{{ auth.username().charAt(0).toUpperCase() }}</span>
-        <span class="uname">{{ auth.username() }}</span>
+        <div class="user-meta">
+          <span class="uname">{{ auth.username() }}</span>
+          <span class="student-id">n003849813 · Anderson</span>
+        </div>
       </div>
       <button id="btn-logout" class="logout" (click)="logout()">⏻ Cerrar sesión</button>
     </div>

@@ -25,12 +25,14 @@ nav a.active { background: linear-gradient(135deg, #6366f1, #06b6d4); color: #ff
 
 .side-footer { padding: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
 .user { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.8rem; }
+.user-meta { display: flex; flex-direction: column; }
 .avatar {
   width: 36px; height: 36px; border-radius: 50%;
   display: grid; place-items: center; font-weight: 800;
   background: linear-gradient(135deg, #6366f1, #06b6d4); color: #fff;
 }
-.uname { font-weight: 600; }
+.uname { font-weight: 600; font-size: 0.95rem; }
+.student-id { font-size: 0.72rem; color: #94a3b8; }
 .logout {
   width: 100%; padding: 0.7rem; border-radius: 10px; cursor: pointer;
   border: 1px solid rgba(248, 113, 113, 0.5); background: rgba(239, 68, 68, 0.15);

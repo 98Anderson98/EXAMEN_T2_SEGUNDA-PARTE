@@ -29,11 +29,23 @@ npm install
 npm start      # http://localhost:4200
 ```
 
-## Usuarios
+## Usuarios de Prueba
 
-| Usuario  | Contraseña | Permisos                         |
-|----------|------------|----------------------------------|
-| admin    | admin123   | CRUD completo (ROLE_ADMIN)       |
-| anderson | user123    | Solo lectura (ROLE_USER)         |
+| Usuario  | Contraseña | Rol                   | Permisos                         |
+|----------|------------|-----------------------|----------------------------------|
+| admin    | admin123   | ROLE_ADMIN, ROLE_USER | CRUD completo (crear, editar, eliminar) |
+| anderson | user123    | ROLE_USER             | Solo lectura                     |
 
-> El CORS del backend permite `http://localhost:4200`.
+## Características Implementadas
+
+- **Autenticación JWT:** Login conectado al backend con almacenamiento de token en LocalStorage y cierre de sesión seguro.
+- **Interceptors:** Inyección automática del header `Authorization: Bearer <token>` en todas las peticiones HTTP y redirección automática en errores 401.
+- **Guards:** Protección de rutas con `authGuard` (requiere sesión) y `guestGuard` (evita login si ya está autenticado).
+- **CRUD de Productos:** Listado con búsqueda reactiva en tiempo real, modales para creación y edición con validación de formularios, y confirmación modal de eliminación.
+- **Diseño Responsive:** Sidebar fijo en desktop que colapsa a menú hamburguesa interactivo en pantallas móviles y conversión dinámica de la tabla de productos a tarjetas para celulares.
+
+---
+**Estudiante:** Anderson Fabrizzio Larios Tito  
+**Código:** n003849813  
+**Repositorio GitHub:** [EXAMEN_T2_SEGUNDA-PARTE](https://github.com/98Anderson98/EXAMEN_T2_SEGUNDA-PARTE)
+
