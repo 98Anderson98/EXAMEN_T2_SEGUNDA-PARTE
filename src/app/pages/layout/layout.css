@@ -1,0 +1,56 @@
+.shell { min-height: 100vh; }
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #1e1b4b, #0f172a);
+  color: #e2e8f0;
+  z-index: 30;
+  transition: transform 0.3s ease;
+}
+
+.side-brand { padding: 1.5rem 1.25rem; font-size: 1.3rem; font-weight: 800; }
+nav { flex: 1; padding: 0 0.75rem; }
+nav a {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.8rem 1rem; border-radius: 12px;
+  color: #cbd5e1; text-decoration: none; font-weight: 600;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+nav a:hover { background: rgba(255, 255, 255, 0.08); transform: translateX(3px); }
+nav a.active { background: linear-gradient(135deg, #6366f1, #06b6d4); color: #fff; }
+
+.side-footer { padding: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.user { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.8rem; }
+.avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center; font-weight: 800;
+  background: linear-gradient(135deg, #6366f1, #06b6d4); color: #fff;
+}
+.uname { font-weight: 600; }
+.logout {
+  width: 100%; padding: 0.7rem; border-radius: 10px; cursor: pointer;
+  border: 1px solid rgba(248, 113, 113, 0.5); background: rgba(239, 68, 68, 0.15);
+  color: #fecaca; font-weight: 700; transition: background 0.2s;
+}
+.logout:hover { background: rgba(239, 68, 68, 0.4); }
+
+.content { margin-left: 250px; padding: 2rem; min-height: 100vh; }
+
+.topbar, .backdrop { display: none; }
+
+@media (max-width: 860px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: none; box-shadow: 8px 0 30px rgba(0, 0, 0, 0.5); }
+  .content { margin-left: 0; padding: 1rem; padding-top: 4.5rem; }
+  .topbar {
+    display: flex; align-items: center; gap: 0.9rem;
+    position: fixed; inset: 0 0 auto 0; height: 56px; padding: 0 1rem;
+    background: #1e1b4b; color: #fff; z-index: 20; font-weight: 700;
+  }
+  .burger { background: none; border: 0; color: #fff; font-size: 1.6rem; cursor: pointer; }
+  .backdrop { display: block; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 25; }
+}

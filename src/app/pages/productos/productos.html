@@ -1,0 +1,102 @@
+<section>
+  <div class="head">
+    <div>
+      <h1>Productos</h1>
+      <p class="sub">{{ filtrados().length }} de {{ productos().length }} productos</p>
+    </div>
+    <button id="btn-nuevo" class="btn primary" (click)="nuevo()">＋ Nuevo producto</button>
+  </div>
+
+  @if (mensaje(); as m) {
+    <div class="toast" [class.err]="m.tipo === 'error'" role="status">{{ m.texto }}</div>
+  }
+
+  <input id="buscar" class="search" type="search" placeholder="Buscar por nombre, categoría, marca o código..."
+         [ngModel]="filtro()" (ngModelChange)="filtro.set($event)" />
+
+  @if (loading()) {
+    <p class="empty">Cargando productos...</p>
+  } @else if (filtrados().length === 0) {
+    <p class="empty">No hay productos para mostrar.</p>
+  } @else {
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Nombre</th><th>Categoría</th><th>Marca</th>
+            <th>Precio</th><th>Stock</th><th>Código de barras</th><th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of filtrados(); track p.id) {
+            <tr>
+              <td data-label="ID">{{ p.id }}</td>
+              <td data-label="Nombre"><strong>{{ p.nombre }}</strong></td>
+              <td data-label="Categoría"><span class="chip">{{ p.categoria }}</span></td>
+              <td data-label="Marca">{{ p.marca }}</td>
+              <td data-label="Precio">{{ p.precio | currency: 'S/ ' }}</td>
+              <td data-label="Stock">
+                <span class="stock" [class.low]="p.stock < 10">{{ p.stock }}</span>
+              </td>
+              <td data-label="Código">{{ p.codigoBarras }}</td>
+              <td class="actions">
+                <button class="btn small" (click)="editar(p)">✏️ Editar</button>
+                <button class="btn small danger" (click)="confirmarEliminar(p)">🗑 Eliminar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>
+
+@if (modalAbierto()) {
+  <div class="overlay" (click)="cerrarModal()">
+    <form class="modal" (click)="$event.stopPropagation()" (ngSubmit)="guardar()" #f="ngForm">
+      <h2>{{ editandoId() === null ? 'Nuevo producto' : 'Editar producto' }}</h2>
+
+      <div class="grid">
+        <label>Nombre
+          <input name="nombre" [(ngModel)]="form.nombre" required maxlength="100" />
+        </label>
+        <label>Categoría
+          <input name="categoria" [(ngModel)]="form.categoria" required maxlength="50" />
+        </label>
+        <label>Marca
+          <input name="marca" [(ngModel)]="form.marca" required maxlength="50" />
+        </label>
+        <label>Código de barras
+          <input name="codigoBarras" [(ngModel)]="form.codigoBarras" required pattern="\d{8,20}"
+                 placeholder="8 a 20 dígitos" />
+        </label>
+        <label>Precio
+          <input name="precio" type="number" step="0.01" min="0.01" [(ngModel)]="form.precio" required />
+        </label>
+        <label>Stock
+          <input name="stock" type="number" min="0" step="1" [(ngModel)]="form.stock" required />
+        </label>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+        <button id="btn-guardar" type="submit" class="btn primary" [disabled]="f.invalid || guardando()">
+          {{ guardando() ? 'Guardando...' : 'Guardar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+}
+
+@if (porEliminar(); as p) {
+  <div class="overlay" (click)="porEliminar.set(null)">
+    <div class="modal small-modal" (click)="$event.stopPropagation()">
+      <h2>Eliminar producto</h2>
+      <p>¿Seguro que deseas eliminar <strong>{{ p.nombre }}</strong>? Esta acción no se puede deshacer.</p>
+      <div class="modal-actions">
+        <button class="btn" (click)="porEliminar.set(null)">Cancelar</button>
+        <button id="btn-confirmar-eliminar" class="btn danger" (click)="eliminar()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+}

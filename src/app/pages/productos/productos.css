@@ -1,0 +1,72 @@
+:host { display: block; }
+
+.head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+h1 { margin: 0; font-size: 1.8rem; color: #0f172a; }
+.sub { margin: 0.2rem 0 0; color: #64748b; }
+
+.btn {
+  padding: 0.6rem 1rem; border-radius: 10px; border: 1px solid #cbd5e1; background: #fff;
+  color: #334155; font-weight: 600; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+}
+.btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn.primary { border: 0; color: #fff; background: linear-gradient(135deg, #6366f1, #06b6d4); }
+.btn.danger { background: #ef4444; border-color: #ef4444; color: #fff; }
+.btn.small { padding: 0.4rem 0.7rem; font-size: 0.82rem; }
+.btn.small.danger { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+
+.toast {
+  margin: 1rem 0 0; padding: 0.8rem 1rem; border-radius: 10px; font-weight: 600;
+  background: #dcfce7; color: #166534; border: 1px solid #86efac; animation: fade 0.3s ease;
+}
+.toast.err { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+@keyframes fade { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+.search {
+  width: 100%; margin: 1.25rem 0; padding: 0.85rem 1rem; border-radius: 12px; font-size: 1rem;
+  border: 1px solid #cbd5e1; outline: none; box-sizing: border-box;
+}
+.search:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); }
+
+.empty { text-align: center; color: #64748b; padding: 2rem; }
+
+.table-wrap { background: #fff; border-radius: 16px; box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08); overflow: hidden; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; padding: 0.9rem 1rem; background: #f1f5f9; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+td { padding: 0.85rem 1rem; border-top: 1px solid #e2e8f0; color: #1e293b; }
+tbody tr { transition: background 0.15s; }
+tbody tr:hover { background: #f8fafc; }
+.actions { display: flex; gap: 0.4rem; white-space: nowrap; }
+
+.chip { padding: 0.2rem 0.6rem; border-radius: 999px; background: #e0e7ff; color: #3730a3; font-size: 0.8rem; font-weight: 600; }
+.stock { padding: 0.2rem 0.6rem; border-radius: 8px; background: #dcfce7; color: #166534; font-weight: 700; }
+.stock.low { background: #fef3c7; color: #92400e; }
+
+.overlay {
+  position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 1rem;
+  background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(3px); animation: fade 0.2s ease;
+}
+.modal { width: 100%; max-width: 560px; max-height: 92vh; overflow: auto; background: #fff; border-radius: 18px; padding: 1.5rem; box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4); }
+.small-modal { max-width: 420px; }
+.modal h2 { margin-top: 0; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+.grid label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.85rem; font-weight: 600; color: #475569; }
+.grid input { padding: 0.65rem 0.8rem; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 1rem; outline: none; }
+.grid input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); }
+.grid input.ng-invalid.ng-touched { border-color: #ef4444; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 1.4rem; }
+
+/* Responsive: tabla -> tarjetas */
+@media (max-width: 860px) {
+  h1 { font-size: 1.5rem; }
+  .btn.primary { width: 100%; }
+  .grid { grid-template-columns: 1fr; }
+  .table-wrap { background: transparent; box-shadow: none; }
+  table, tbody, tr, td { display: block; }
+  thead { display: none; }
+  tr { background: #fff; border-radius: 14px; margin-bottom: 0.9rem; padding: 0.6rem 0.4rem; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08); }
+  td { display: flex; justify-content: space-between; align-items: center; border: 0; padding: 0.4rem 0.8rem; }
+  td::before { content: attr(data-label); font-weight: 700; color: #64748b; font-size: 0.78rem; text-transform: uppercase; }
+  td.actions { justify-content: flex-end; padding-top: 0.7rem; }
+  td.actions::before { content: none; }
+}
